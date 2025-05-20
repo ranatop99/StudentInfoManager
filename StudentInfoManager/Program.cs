@@ -1,9 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using StudentInfoManager.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+//Register DBContext
+
+builder.Services.AddDbContext<StudentInfoDataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("StudentInfoDb")));
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
